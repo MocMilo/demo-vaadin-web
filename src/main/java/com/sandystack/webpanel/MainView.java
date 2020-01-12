@@ -1,5 +1,6 @@
 package com.sandystack.webpanel;
 
+import com.sandystack.webpanel.ui.TabsLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -12,10 +13,14 @@ import com.vaadin.flow.spring.annotation.UIScope;
 @UIScope
 public class MainView extends Div {
 
-    public MainView() {
+    private TabsLayout tabsLayout;
+
+    public MainView(TabsLayout tabsLayout) {
+        this.tabsLayout = tabsLayout;
 
         Div topArea = createMainViewPage();
-        VerticalLayout mainTabsLayout = new VerticalLayout();
+        VerticalLayout mainTabsLayout = createMainTabsLayout();
+
         add(topArea, mainTabsLayout);
     }
 
@@ -35,5 +40,10 @@ public class MainView extends Div {
         return mainViewPage;
     }
 
-
+    /**
+     * Creates main tabs menu with content (tab headers with selected tab content page)
+     */
+    private VerticalLayout createMainTabsLayout() {
+        return tabsLayout.create();
+    }
 }
